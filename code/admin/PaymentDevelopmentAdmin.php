@@ -61,7 +61,10 @@ class PaymentDevelopmentAdmin extends Controller{
 	 * Get all available payment types
 	 */
 	private function PaymentTypes() {
-		$gateways =  Omnipay\Common\GatewayFactory::find();
+		$factory = new Omnipay\Common\GatewayFactory;
+		$gateways = $factory->find('/vendor/rabobank');
+
+		//$gateways =  Omnipay\Common\GatewayFactory::find();
 		$gateways = array_map(function($name) {
 			$factory = new Omnipay\Common\GatewayFactory;
 			return $factory->create($name);
